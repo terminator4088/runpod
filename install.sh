@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#####		/bin/bash -c "/workspace/init.sh; exec /bin/bash"
+#####		/bin/bash -c "/workspace/start.sh; exec /bin/bash"
 
 cd /workspace
 apt update
