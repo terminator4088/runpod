@@ -45,11 +45,13 @@ touch download_finished &> download.log &
 cd /workspace
 cat <<EOT > copy_downloaded_models.sh
 #!/bin/bash
+cd /workspace
+mkdir stable-diffusion-webui/models/embeddings
 mv download/Stable-diffusion/* stable-diffusion-webui/models/Stable-diffusion
 mv download/embeddings/* stable-diffusion-webui/models/embeddings
 mv download/Lora/* stable-diffusion-webui/models/Lora
 mv download/controlnet_models/* stable-diffusion-webui/extensions-builtin/sd-webui-controlnet/models
-mv download/vae/* stable-diffusion-webui/vae/Lora
+mv download/VAE/* stable-diffusion-webui/VAE-approx/Lora
 EOT
 chmod +x copy_downloaded_models.sh
 
@@ -88,7 +90,7 @@ chmod +x relauncher.py
 #source /workspace/venv/bin/activate
 python3 -u /workspace/stable-diffusion-webui/relauncher.py | while IFS= read -r line
 do
-	if [[ "$line" == *"Error"* ]]; then
+	if [[ "$line" == *"Available VAEs"* ]]; then
 		pkill relauncher.py
 		echo "Killed Relauncher as it was stuck at no models"
 		
@@ -101,6 +103,6 @@ do
 
   
 		echo "Setup finished, launching SD :)"  
-    python3 /workspace/stable-diffusion-webui/relauncher.py
+		python3 /workspace/stable-diffusion-webui/relauncher.py
 	fi
 done
