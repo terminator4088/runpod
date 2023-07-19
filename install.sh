@@ -47,11 +47,12 @@ cat <<EOT > copy_downloaded_models.sh
 #!/bin/bash
 cd /workspace
 mkdir stable-diffusion-webui/models/embeddings
+mkdir stable-diffusion-webui/models/VAE
 mv download/Stable-diffusion/* stable-diffusion-webui/models/Stable-diffusion
 mv download/embeddings/* stable-diffusion-webui/models/embeddings
 mv download/Lora/* stable-diffusion-webui/models/Lora
+mv download/VAE/* stable-diffusion-webui/VAE
 mv download/controlnet_models/* stable-diffusion-webui/extensions-builtin/sd-webui-controlnet/models
-mv download/VAE/* stable-diffusion-webui/VAE-approx/Lora
 EOT
 chmod +x copy_downloaded_models.sh
 
