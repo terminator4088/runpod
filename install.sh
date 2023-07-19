@@ -60,6 +60,7 @@ chmod +x copy_downloaded_models.sh
 cd /workspace
 cat <<EOT > start.sh
 #!/bin/bash
+cd /workspace
 apt update
 apt install -y vim
 cd stable-diffusion-webui
