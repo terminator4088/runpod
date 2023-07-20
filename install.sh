@@ -6,13 +6,17 @@
 /bin/bash -c "wget "https://raw.githubusercontent.com/terminator4088/runpod/main/install.sh" -O /setup.sh; chmod +x /setup.sh; /setup.sh; exec /bin/bash"
 END_COMMENT
 
+
+apt update
+apt install -y vim
+
 if [ -f /workspace/installed ]; then
-  python3 -u /workspace/stable-diffusion-webui/relauncher.py
+  cd /workspace/stable-diffusion-webui
+  python3 -u relauncher.py
   exit 0
 fi
 
 cd /workspace
-apt update
 apt -y install vim git-lfs
 
 ##Download orig_backup
@@ -28,7 +32,6 @@ git clone https://github.com/vladmandic/automatic.git ./
 # git clone https://github.com/Mikubill/sd-webui-controlnet.git ./extensions/sd-webui-controlnet
 # git clone https://github.com/d8ahazard/sd_dreambooth_extension.git ./extensions/sd_dreambooth_extension
 # git clone https://github.com/imrayya/stable-diffusion-webui-Prompt_Generator.git ./extensions/stable-diffusion-webui-Prompt_Generator
-
 
 
 #Download Models
@@ -68,17 +71,6 @@ mv download/controlnet_models/* stable-diffusion-webui/extensions-builtin/sd-web
 EOT
 chmod +x copy_downloaded_models.sh
 
-#Define Start Script
-cd /workspace
-cat <<EOT > start.sh
-#!/bin/bash
-cd /workspace
-apt update
-apt install -y vim
-cd stable-diffusion-webui
-python3 relauncher.py
-EOT
-chmod +x start.sh
 
 #Write necessary files
 cd /workspace/stable-diffusion-webui
@@ -104,6 +96,7 @@ chmod +x relauncher.py
 #source /workspace/venv/bin/activate
 python3 -u /workspace/stable-diffusion-webui/relauncher.py | while IFS= read -r line
 do
+	echo "--$line"
 	if [[ "$line" == *"Available VAEs"* ]]; then
 		pkill relauncher.py
 		echo "Killed Relauncher as it was stuck at no models"
@@ -112,7 +105,7 @@ do
 			sleep 1
 		done
 		
-		./workspace/copy_downloaded_models.sh
+		/workspace/copy_downloaded_models.sh
 		echo "Copied Models"
 
   		touch /workspace/installed
