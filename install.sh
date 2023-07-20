@@ -6,7 +6,7 @@
 /bin/bash -c "wget "https://raw.githubusercontent.com/terminator4088/runpod/main/install.sh" -O /setup.sh; chmod +x /setup.sh; /setup.sh; exec /bin/bash"
 END_COMMENT
 
-if [ -f /workspace/var/installed ]; then
+if [ -f /workspace/installed ]; then
   python3 -u /workspace/stable-diffusion-webui/relauncher.py
   exit 0
 fi
@@ -113,7 +113,7 @@ do
 		./workspace/copy_downloaded_models.sh
 		echo "Copied Models"
 
-  		touch /workspace/var/installed
+  		touch /workspace/installed
   
 		echo "Setup finished, launching SD :)"  
 		python3 /workspace/stable-diffusion-webui/relauncher.py
