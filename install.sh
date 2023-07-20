@@ -2,6 +2,15 @@
 
 #####		/bin/bash -c "/workspace/start.sh; exec /bin/bash"
 
+: <<'END_COMMENT'
+/bin/bash -c "wget "https://raw.githubusercontent.com/terminator4088/runpod/main/install.sh" -O /setup.sh; chmod +x /setup.sh; /setup.sh; exec /bin/bash"
+END_COMMENT
+
+if [ -f /workspace/var/installed ]; then
+  python3 -u /workspace/stable-diffusion-webui/relauncher.py
+  exit 0
+fi
+
 cd /workspace
 apt update
 apt -y install vim git-lfs
@@ -24,22 +33,23 @@ git clone https://github.com/vladmandic/automatic.git ./
 
 #Download Models
 #wget "https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/v1-5-pruned-emaonly.safetensors" -O "Stable-diffusion/vanila.safetensors" &&
-mkdir /workspace/download && \
+(mkdir /workspace/download && \
 cd /workspace/download && \
 mkdir Stable-diffusion && \
 mkdir Lora && \
 mkdir embeddings && \
 mkdir controlnet_models && \
 mkdir VAE && \
-wget "https://civitai.com/api/download/models/15640?type=Model&format=SafeTensor&size=full&fp=fp16" -O "Stable-diffusion/uber.safetensors" && \
+wget "https://civitai.com/api/download/models/15640?type=Model&format=SafeTensor&size=full&fp=fp16" -O "Stable-diffusion/Uber.safetensors" && \
 wget "https://civitai.com/api/download/models/7543?type=Model&format=SafeTensor&size=full&fp=fp16" -O "Stable-diffusion/Chillout.safetensors" && \
+wget "https://civitai.com/api/download/models/17233?type=Model&format=SafeTensor&size=full&fp=fp16" -O "Stable-diffusion/AOM3A1B.safetensors" && \
 wget "https://civitai.com/api/download/models/80869?type=Model&format=PickleTensor" -O "VAE/840k.pt" && \
 wget "https://civitai.com/api/download/models/67485?type=Model&format=SafeTensor" -O "Lora/POV_missionary.safetensors" && \
 wget "https://civitai.com/api/download/models/77169?type=Model&format=PickleTensor" -O "embeddings/BadDream.pt" && \
 wget "https://civitai.com/api/download/models/77173?type=Model&format=PickleTensor" -O "embeddings/UnrealisticDream.pt" && \
 wget "https://civitai.com/api/download/models/82745?type=Negative&format=Other" -O "embeddings/CyberRealistic.pt" && \
 git clone https://huggingface.co/lllyasviel/ControlNet-v1-1 ./controlnet_models && \
-touch download_finished &> download.log &
+touch download_finished) &> download.log &
 
 #Define Copy Script
 cd /workspace
@@ -103,6 +113,7 @@ do
 		./workspace/copy_downloaded_models.sh
 		echo "Copied Models"
 
+  		touch /workspace/var/installed
   
 		echo "Setup finished, launching SD :)"  
 		python3 /workspace/stable-diffusion-webui/relauncher.py
