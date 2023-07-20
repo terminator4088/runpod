@@ -44,7 +44,8 @@ mkdir VAE && \
 wget "https://civitai.com/api/download/models/15640?type=Model&format=SafeTensor&size=full&fp=fp16" -O "Stable-diffusion/Uber.safetensors" && \
 wget "https://civitai.com/api/download/models/7543?type=Model&format=SafeTensor&size=full&fp=fp16" -O "Stable-diffusion/Chillout.safetensors" && \
 wget "https://civitai.com/api/download/models/17233?type=Model&format=SafeTensor&size=full&fp=fp16" -O "Stable-diffusion/AOM3A1B.safetensors" && \
-wget "https://civitai.com/api/download/models/80869?type=Model&format=PickleTensor" -O "VAE/840k.pt" && \
+wget "https://huggingface.co/stabilityai/sd-vae-ft-mse-original/resolve/main/vae-ft-mse-840000-ema-pruned.ckpt" -O "VAE/840k.pt" && \
+wget "https://huggingface.co/hakurei/waifu-diffusion-v1-4/resolve/main/vae/kl-f8-anime2.ckpt" -O "VAE/kl-f8.pt" && \
 wget "https://civitai.com/api/download/models/67485?type=Model&format=SafeTensor" -O "Lora/POV_missionary.safetensors" && \
 wget "https://civitai.com/api/download/models/77169?type=Model&format=PickleTensor" -O "embeddings/BadDream.pt" && \
 wget "https://civitai.com/api/download/models/77173?type=Model&format=PickleTensor" -O "embeddings/UnrealisticDream.pt" && \
