@@ -1,9 +1,6 @@
 #!/bin/bash
 
-#####		/bin/bash -c "/workspace/start.sh; exec /bin/bash"
-
-: <<'END_COMMENT'
-/bin/bash -c "wget "https://raw.githubusercontent.com/terminator4088/runpod/main/install.sh" -O /setup.sh; chmod +x /setup.sh; /setup.sh; exec /bin/bash"
+#####	Start Docker Cmd: /bin/bash -c "wget "https://raw.githubusercontent.com/terminator4088/runpod/main/install.sh" -O /setup.sh; chmod +x /setup.sh; /setup.sh; exec /bin/bash"
 END_COMMENT
 
 
