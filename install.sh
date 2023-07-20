@@ -50,7 +50,7 @@ wget "https://civitai.com/api/download/models/67485?type=Model&format=SafeTensor
 wget "https://civitai.com/api/download/models/77169?type=Model&format=PickleTensor" -O "embeddings/BadDream.pt" && \
 wget "https://civitai.com/api/download/models/77173?type=Model&format=PickleTensor" -O "embeddings/UnrealisticDream.pt" &&\
 wget "https://civitai.com/api/download/models/82745?type=Negative&format=Other" -O "embeddings/CyberRealistic.pt" && \
-wget "https://civitai.com/api/download/models/9208?type=Model&format=SafeTensor&size=full&fp=fp16" -O "embeddings/EasyNegative.pt" && \
+wget "https://civitai.com/api/download/models/9208?type=Model&format=SafeTensor&size=full&fp=fp16" -O "embeddings/EasyNegative.safetensors" && \
 git clone https://huggingface.co/lllyasviel/ControlNet-v1-1 ./controlnet_models && \
 touch download_finished) &> download.log &
 
