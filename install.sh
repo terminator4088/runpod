@@ -33,6 +33,7 @@ git clone https://github.com/vladmandic/automatic.git ./
 
 #Download Models
 #wget "https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/v1-5-pruned-emaonly.safetensors" -O "Stable-diffusion/vanila.safetensors" &&
+cd /workspace
 (mkdir /workspace/download && \
 cd /workspace/download && \
 mkdir Stable-diffusion && \
