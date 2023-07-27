@@ -41,11 +41,11 @@ mkdir Lora && \
 mkdir embeddings && \
 mkdir controlnet_models && \
 mkdir VAE && \
-wget "https://civitai.com/api/download/models/15640?type=Model&format=SafeTensor&size=full&fp=fp16" -O "Stable-diffusion/Uber.safetensors" && \
-wget "https://civitai.com/api/download/models/7543?type=Model&format=SafeTensor&size=full&fp=fp16" -O "Stable-diffusion/Chillout.safetensors" && \
-wget "https://civitai.com/api/download/models/17233?type=Model&format=SafeTensor&size=full&fp=fp16" -O "Stable-diffusion/AOM3A1B.safetensors" && \
+wget "https://civitai.com/api/download/models/126688?type=Model&format=SafeTensor&size=full&fp=fp16" -O "Stable-diffusion/XL_Dreamshaper.safetensors" && \
+wget "https://civitai.com/api/download/models/126613?type=Model&format=SafeTensor&size=full&fp=fp32" -O "Stable-diffusion/XL_Refiner" && \
 wget "https://huggingface.co/stabilityai/sd-vae-ft-mse-original/resolve/main/vae-ft-mse-840000-ema-pruned.ckpt" -O "VAE/840k.pt" && \
 wget "https://huggingface.co/hakurei/waifu-diffusion-v1-4/resolve/main/vae/kl-f8-anime2.ckpt" -O "VAE/kl-f8.pt" && \
+wget "https://civitai.com/api/download/models/126613?type=VAE&format=Other" -O "VAE/SDXL_Refiner.pt" && \
 wget "https://civitai.com/api/download/models/67485?type=Model&format=SafeTensor" -O "Lora/POV_missionary.safetensors" && \
 wget "https://civitai.com/api/download/models/77169?type=Model&format=PickleTensor" -O "embeddings/BadDream.pt" && \
 wget "https://civitai.com/api/download/models/77173?type=Model&format=PickleTensor" -O "embeddings/UnrealisticDream.pt" &&\
@@ -53,6 +53,8 @@ wget "https://civitai.com/api/download/models/82745?type=Negative&format=Other" 
 wget "https://civitai.com/api/download/models/9208?type=Model&format=SafeTensor&size=full&fp=fp16" -O "embeddings/EasyNegative.safetensors" && \
 git clone https://huggingface.co/lllyasviel/ControlNet-v1-1 ./controlnet_models && \
 touch download_finished) &> download.log &
+#wget "https://civitai.com/api/download/models/15640?type=Model&format=SafeTensor&size=full&fp=fp16" -O "Stable-diffusion/Uber.safetensors" && \
+#wget "https://civitai.com/api/download/models/17233?type=Model&format=SafeTensor&size=full&fp=fp16" -O "Stable-diffusion/AOM3A1B.safetensors" && \
 
 #Define Copy Script
 cd /workspace
