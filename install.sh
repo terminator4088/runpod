@@ -63,6 +63,7 @@ cat <<EOT > copy_downloaded_models.sh
 cd /workspace
 mkdir stable-diffusion-webui/models/embeddings/
 mkdir stable-diffusion-webui/models/VAE/
+mkdir stable-diffusion-webui/models/Lora/
 mv download/Stable-diffusion/* stable-diffusion-webui/models/Stable-diffusion/
 mv download/embeddings/* stable-diffusion-webui/models/embeddings/
 mv download/Lora/* stable-diffusion-webui/models/Lora/
