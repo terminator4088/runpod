@@ -1,8 +1,6 @@
 #!/bin/bash
 
 #####	Start Docker Cmd: /bin/bash -c "wget "https://raw.githubusercontent.com/terminator4088/runpod/main/install.sh" -O /setup.sh; chmod +x /setup.sh; /setup.sh; exec /bin/bash"
-END_COMMENT
-
 
 apt update
 apt install -y vim
