@@ -39,16 +39,15 @@ mkdir Lora;
 mkdir embeddings;
 mkdir controlnet_models;
 mkdir VAE;
-wget "https://civitai.com/api/download/models/131960?type=Model&format=SafeTensor&size=full&fp=fp16" -O "Stable-diffusion/TalmendoXL.safetensors";
-wget "https://civitai.com/api/download/models/148259?type=Model&format=SafeTensor&size=pruned&fp=fp16" -O "Stable-diffusion/DynaVision XL.safetensors";
+wget "https://civitai.com/api/download/models/126688?type=Model&format=SafeTensor&size=full&fp=fp16" -O "Stable-diffusion/DreamShaper.safetensors";
+wget "https://civitai.com/api/download/models/128078?type=Model&format=SafeTensor&size=full&fp=fp32" -O "Stable-diffusion/Vanilla.safetensors";
+wget "https://civitai.com/api/download/models/134461?type=Model&format=SafeTensor&size=full&fp=fp16" -O "Stable-diffusion/SDVN6-RealXL.safetensors";
 wget "https://civitai.com/api/download/models/131960?type=VAE&format=SafeTensor" -O "VAE/TalmendoXL.safetensors";
 wget "https://civitai.com/api/download/models/130720?type=VAE&format=Other" -O "VAE/kl-f8.pt";
-#wget "https://civitai.com/api/download/models/67485?type=Model&format=SafeTensor" -O "Lora/POV_missionary.safetensors" ;
+wget "https://civitai.com/api/download/models/135867?type=Model&format=SafeTensor" -O "Lora/Detail_Tweaker_XL.safetensors" ;
+wget "https://civitai.com/api/download/models/152309?type=Model&format=SafeTensor" -O "Lora/Artfull.safetensors" ;
 wget "https://civitai.com/api/download/models/77169?type=Model&format=PickleTensor" -O "embeddings/BadDream.pt";
-wget "https://civitai.com/api/download/models/77173?type=Model&format=PickleTensor" -O "embeddings/UnrealisticDream.pt";
-wget "https://civitai.com/api/download/models/82745?type=Negative&format=Other" -O "embeddings/CyberRealistic.pt";
-wget "https://civitai.com/api/download/models/9208?type=Model&format=SafeTensor&size=full&fp=fp16" -O "embeddings/EasyNegative.safetensors";
-git clone https://huggingface.co/lllyasviel/ControlNet-v1-1 ./controlnet_models;
+git clone https://huggingface.co/lllyasviel/sd_control_collection ./controlnet_models;
 touch download_finished) &> download.log &
 #wget "https://civitai.com/api/download/models/15640?type=Model&format=SafeTensor&size=full&fp=fp16" -O "Stable-diffusion/Uber.safetensors" && \
 #wget "https://civitai.com/api/download/models/17233?type=Model&format=SafeTensor&size=full&fp=fp16" -O "Stable-diffusion/AOM3A1B.safetensors" && \
