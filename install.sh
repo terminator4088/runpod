@@ -43,7 +43,6 @@ wget "https://civitai.com/api/download/models/126688?type=Model&format=SafeTenso
 wget "https://civitai.com/api/download/models/128078?type=Model&format=SafeTensor&size=full&fp=fp32" -O "Stable-diffusion/Vanilla.safetensors";
 wget "https://civitai.com/api/download/models/134461?type=Model&format=SafeTensor&size=full&fp=fp16" -O "Stable-diffusion/SDVN6-RealXL.safetensors";
 wget "https://civitai.com/api/download/models/131960?type=VAE&format=SafeTensor" -O "VAE/TalmendoXL.safetensors";
-wget "https://civitai.com/api/download/models/130720?type=VAE&format=Other" -O "VAE/kl-f8.pt";
 wget "https://civitai.com/api/download/models/135867?type=Model&format=SafeTensor" -O "Lora/Detail_Tweaker_XL.safetensors" ;
 wget "https://civitai.com/api/download/models/152309?type=Model&format=SafeTensor" -O "Lora/Artfull.safetensors" ;
 wget "https://civitai.com/api/download/models/77169?type=Model&format=PickleTensor" -O "embeddings/BadDream.pt";
