@@ -4,7 +4,7 @@
 
 apt update
 apt install -y vim
-
+touch /workspace/installed
 if [ -f /workspace/installed ]; then
   cd /workspace/stable-diffusion-webui
   python3 -u relauncher.py
