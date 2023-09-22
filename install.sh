@@ -5,6 +5,27 @@
 apt update
 apt install -y vim
 touch /workspace/installed
+
+cd /workspace/stable-diffusion-webui
+cat  <<EOT > relauncher.py
+#!/usr/bin/python3
+import os, time
+
+n = 0
+while True:
+    print('Relauncher: Launching...')
+    if n > 0:
+        print(f'\tRelaunch count: {n}')
+    launch_string = "/workspace/stable-diffusion-webui/webui.sh -f --listen"
+    os.system(launch_string)
+    print('Relauncher: Process is ending. Relaunching in 2s...')
+    n += 1
+    time.sleep(2)
+EOT
+chmod +x relauncher.py
+
+
+
 if [ -f /workspace/installed ]; then
   cd /workspace/stable-diffusion-webui
   python3 -u relauncher.py
