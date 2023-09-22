@@ -22,8 +22,10 @@ mkdir /workspace/stable-diffusion-webui
 cd /workspace/stable-diffusion-webui
 
 if [ -z "$A1111" ]; then
+	echo "Installing VLAD"
 	git clone https://github.com/vladmandic/automatic.git ./
 else
+	echo "Installing A1111"
 	git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git ./
 	git checkout tags/v1.3.2
 	git clone https://github.com/Mikubill/sd-webui-controlnet.git ./extensions/sd-webui-controlnet
@@ -64,9 +66,9 @@ mv download/embeddings/* stable-diffusion-webui/models/embeddings/
 mv download/Lora/* stable-diffusion-webui/models/Lora/
 mv download/VAE/* stable-diffusion-webui/models/VAE/
 if [ -z "$A1111" ]; then
-	mv download/controlnet_models/* stable-diffusion-webui/extensions/sd-webui-controlnet/models/
-else
 	mv download/controlnet_models/* stable-diffusion-webui/extensions-builtin/sd-webui-controlnet/models/
+else
+	mv download/controlnet_models/* stable-diffusion-webui/extensions/sd-webui-controlnet/models/
 fi
 EOT
 chmod +x copy_downloaded_models.sh
