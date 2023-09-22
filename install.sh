@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#####	Start Docker Cmd: /bin/bash -c "wget "https://raw.githubusercontent.com/terminator4088/runpod/main/install.sh" -O /setup.sh; chmod +x /setup.sh; /setup.sh; exec /bin/bash"
+#####	Start Docker Cmd: /bin/bash -c 'if [ -z "$CUSTOM_COMMAND_EXECUTED" ]; then wget "https://raw.githubusercontent.com/terminator4088/runpod/main/install.sh" -O /setup.sh && chmod +x /setup.sh && /setup.sh; export CUSTOM_COMMAND_EXECUTED=1; fi; exec /bin/bash'
 
 apt update
 apt install -y vim
@@ -12,7 +12,7 @@ if [ -f /workspace/installed ]; then
 fi
 
 cd /workspace
-apt -y install vim git-lfs
+apt -y install git-lfs
 
 ##Download orig_backup
 apt -y install rclone
@@ -21,13 +21,15 @@ apt -y install rclone
 mkdir /workspace/stable-diffusion-webui
 cd /workspace/stable-diffusion-webui
 
-git clone https://github.com/vladmandic/automatic.git ./
-# git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git ./
-# git checkout tags/v1.3.2
-# git clone https://github.com/Mikubill/sd-webui-controlnet.git ./extensions/sd-webui-controlnet
-# git clone https://github.com/d8ahazard/sd_dreambooth_extension.git ./extensions/sd_dreambooth_extension
-# git clone https://github.com/imrayya/stable-diffusion-webui-Prompt_Generator.git ./extensions/stable-diffusion-webui-Prompt_Generator
-
+if [ -z "$A1111" ]; then
+	git clone https://github.com/vladmandic/automatic.git ./
+else
+	git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git ./
+	git checkout tags/v1.3.2
+	git clone https://github.com/Mikubill/sd-webui-controlnet.git ./extensions/sd-webui-controlnet
+	git clone https://github.com/d8ahazard/sd_dreambooth_extension.git ./extensions/sd_dreambooth_extension
+	git clone https://github.com/imrayya/stable-diffusion-webui-Prompt_Generator.git ./extensions/stable-diffusion-webui-Prompt_Generator
+fi
 
 #Download Models
 #wget "https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/v1-5-pruned-emaonly.safetensors" -O "Stable-diffusion/vanila.safetensors" &&
@@ -61,7 +63,11 @@ mv download/Stable-diffusion/* stable-diffusion-webui/models/Stable-diffusion/
 mv download/embeddings/* stable-diffusion-webui/models/embeddings/
 mv download/Lora/* stable-diffusion-webui/models/Lora/
 mv download/VAE/* stable-diffusion-webui/models/VAE/
-mv download/controlnet_models/* stable-diffusion-webui/extensions-builtin/sd-webui-controlnet/models/
+if [ -z "$A1111" ]; then
+	mv download/controlnet_models/* stable-diffusion-webui/extensions/sd-webui-controlnet/models/
+else
+	mv download/controlnet_models/* stable-diffusion-webui/extensions-builtin/sd-webui-controlnet/models/
+fi
 EOT
 chmod +x copy_downloaded_models.sh
 
