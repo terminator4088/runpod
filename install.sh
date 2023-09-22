@@ -42,6 +42,7 @@ mkdir Stable-diffusion;
 mkdir Lora;
 mkdir embeddings;
 mkdir VAE;
+mkdir controlnet_models;
 wget "https://civitai.com/api/download/models/126688?type=Model&format=SafeTensor&size=full&fp=fp16" -O "Stable-diffusion/DreamShaper.safetensors";
 #wget "https://civitai.com/api/download/models/128078?type=Model&format=SafeTensor&size=full&fp=fp32" -O "Stable-diffusion/Vanilla.safetensors";
 #wget "https://civitai.com/api/download/models/134461?type=Model&format=SafeTensor&size=full&fp=fp16" -O "Stable-diffusion/SDVN6-RealXL.safetensors";
