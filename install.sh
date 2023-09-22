@@ -5,7 +5,7 @@
 apt update
 apt install -y vim
 
-if [ -f /workspace/installed ]; then
+if [ -d /workspace/stable-diffusion-webui ]; then
   cd /workspace/stable-diffusion-webui
   python3 -u relauncher.py
   exit 0
@@ -66,10 +66,10 @@ wget "https://huggingface.co/lllyasviel/sd_control_collection/blob/main/t2i-adap
 wget "https://huggingface.co/lllyasviel/sd_control_collection/blob/main/thibaud_xl_openpose_256lora.safetensors" ;
 
 cd ..
-touch download_finished) &> download.log &
+./copy_downloaded_models.sh) &> download.log &
 
 #Define Copy Script
-cd /workspace
+cd /workspace/download
 cat <<EOT > copy_downloaded_models.sh
 #!/bin/bash
 cd /workspace
@@ -108,8 +108,6 @@ while True:
 EOT
 chmod +x relauncher.py
 
-
-
 #source /workspace/venv/bin/activate
 python3 -u /workspace/stable-diffusion-webui/relauncher.py | while IFS= read -r line
 do
@@ -124,8 +122,6 @@ do
 		
 		/workspace/copy_downloaded_models.sh
 		echo "Copied Models"
-
-  		touch /workspace/installed
   
 		echo "Setup finished, launching SD :)"  
 		python3 /workspace/stable-diffusion-webui/relauncher.py
