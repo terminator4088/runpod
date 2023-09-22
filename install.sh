@@ -29,8 +29,8 @@ else
 	git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git ./
 	git checkout tags/v1.3.2
 	git clone https://github.com/Mikubill/sd-webui-controlnet.git ./extensions/sd-webui-controlnet
-	git clone https://github.com/d8ahazard/sd_dreambooth_extension.git ./extensions/sd_dreambooth_extension
-	git clone https://github.com/imrayya/stable-diffusion-webui-Prompt_Generator.git ./extensions/stable-diffusion-webui-Prompt_Generator
+	#git clone https://github.com/d8ahazard/sd_dreambooth_extension.git ./extensions/sd_dreambooth_extension
+	#git clone https://github.com/imrayya/stable-diffusion-webui-Prompt_Generator.git ./extensions/stable-diffusion-webui-Prompt_Generator
 fi
 
 #Download Models
@@ -43,12 +43,13 @@ mkdir Lora;
 mkdir embeddings;
 mkdir VAE;
 wget "https://civitai.com/api/download/models/126688?type=Model&format=SafeTensor&size=full&fp=fp16" -O "Stable-diffusion/DreamShaper.safetensors";
-wget "https://civitai.com/api/download/models/128078?type=Model&format=SafeTensor&size=full&fp=fp32" -O "Stable-diffusion/Vanilla.safetensors";
-wget "https://civitai.com/api/download/models/134461?type=Model&format=SafeTensor&size=full&fp=fp16" -O "Stable-diffusion/SDVN6-RealXL.safetensors";
-wget "https://civitai.com/api/download/models/131960?type=VAE&format=SafeTensor" -O "VAE/TalmendoXL.safetensors";
-wget "https://civitai.com/api/download/models/135867?type=Model&format=SafeTensor" -O "Lora/Detail_Tweaker_XL.safetensors" ;
-wget "https://civitai.com/api/download/models/152309?type=Model&format=SafeTensor" -O "Lora/Artfull.safetensors" ;
-git clone https://huggingface.co/lllyasviel/sd_control_collection ./controlnet_models;
+#wget "https://civitai.com/api/download/models/128078?type=Model&format=SafeTensor&size=full&fp=fp32" -O "Stable-diffusion/Vanilla.safetensors";
+#wget "https://civitai.com/api/download/models/134461?type=Model&format=SafeTensor&size=full&fp=fp16" -O "Stable-diffusion/SDVN6-RealXL.safetensors";
+#wget "https://civitai.com/api/download/models/131960?type=VAE&format=SafeTensor" -O "VAE/TalmendoXL.safetensors";
+#wget "https://civitai.com/api/download/models/135867?type=Model&format=SafeTensor" -O "Lora/Detail_Tweaker_XL.safetensors" ;
+#wget "https://civitai.com/api/download/models/152309?type=Model&format=SafeTensor" -O "Lora/Artfull.safetensors" ;
+#git clone https://huggingface.co/lllyasviel/sd_control_collection ./controlnet_models;
+wget "https://huggingface.co/lllyasviel/sd_control_collection/blob/main/diffusers_xl_canny_small.safetensors" -O "controlnet_models/diffusers_xl_canny_small.safetensors" ;
 touch download_finished) &> download.log &
 #wget "https://civitai.com/api/download/models/15640?type=Model&format=SafeTensor&size=full&fp=fp16" -O "Stable-diffusion/Uber.safetensors" && \
 #wget "https://civitai.com/api/download/models/17233?type=Model&format=SafeTensor&size=full&fp=fp16" -O "Stable-diffusion/AOM3A1B.safetensors" && \
