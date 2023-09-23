@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#####	Start Docker Cmd: /bin/bash -c 'if [ ! -f /setup.sh ]; then wget "https://raw.githubusercontent.com/terminator4088/runpod/main/install.sh" -O /setup.sh && chmod +x /setup.sh && /setup.sh; fi; exec /bin/bash'
+#####	Start Docker Cmd: /bin/bash -c 'if [ ! -f /setup.sh ]; then wget "https://raw.githubusercontent.com/terminator4088/runpod/main/install.sh" -O /setup.sh && chmod +x /setup.sh && /setup.sh; fi'
 
 apt update
 apt install -y vim
@@ -42,8 +42,9 @@ fi
 #Download Models
 #wget "https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/v1-5-pruned-emaonly.safetensors" -O "Stable-diffusion/vanila.safetensors" &&
 cd /workspace
-(mkdir /workspace/download;
-cd /workspace/download;
+mkdir /workspace/download
+
+(cd /workspace/download;
 mkdir Stable-diffusion;
 mkdir Lora;
 mkdir embeddings;
