@@ -60,18 +60,17 @@ wget "https://civitai.com/api/download/models/152309?type=Model&format=SafeTenso
 
 cd controlnet_models
 
-wget "https://huggingface.co/lllyasviel/sd_control_collection/blob/main/diffusers_xl_depth_mid.safetensors" ;
-wget "https://huggingface.co/lllyasviel/sd_control_collection/blob/main/diffusers_xl_canny_mid.safetensors" ;
-wget "https://huggingface.co/lllyasviel/sd_control_collection/blob/main/ip-adapter_xl.pth" ;
-wget "https://huggingface.co/lllyasviel/sd_control_collection/blob/main/kohya_controllllite_xl_blur.safetensors" ;
-wget "https://huggingface.co/lllyasviel/sd_control_collection/blob/main/t2i-adapter_xl_openpose.safetensors" ;
-wget "https://huggingface.co/lllyasviel/sd_control_collection/blob/main/thibaud_xl_openpose_256lora.safetensors" ;
+wget "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/diffusers_xl_depth_mid.safetensors" ;
+wget "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/diffusers_xl_canny_mid.safetensors" ;
+wget "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/ip-adapter_xl.pth" ;
+wget "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/kohya_controllllite_xl_blur.safetensors" ;
+wget "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/t2i-adapter_xl_openpose.safetensors" ;
+wget "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/thibaud_xl_openpose_256lora.safetensors" ;
 
-cd ..
-./copy_downloaded_models.sh) &> download.log &
+./workspace/copy_downloaded_models.sh) &> download.log &
 
 #Define Copy Script
-cd /workspace/download
+cd /workspace
 cat <<EOT > copy_downloaded_models.sh
 #!/bin/bash
 cd /workspace
