@@ -35,6 +35,7 @@ else
  	git clone https://github.com/continue-revolution/sd-webui-animatediff
 	git clone https://github.com/imrayya/stable-diffusion-webui-Prompt_Generator.git
 	git clone https://github.com/IDEA-Research/DWPose
+	git clone https://github.com/Uminosachi/sd-webui-inpaint-anything.git
 	#git clone https://github.com/d8ahazard/sd_dreambooth_extension.git ./extensions/sd_dreambooth_extension
 fi
 
@@ -50,7 +51,7 @@ mkdir VAE;
 mkdir controlnet_models;
 wget "https://civitai.com/api/download/models/126688?type=Model&format=SafeTensor&size=full&fp=fp16" -O "Stable-diffusion/DreamShaper.safetensors";
 wget "https://civitai.com/api/download/models/166909?type=Model&format=SafeTensor&size=pruned&fp=fp16" -O "Stable-diffusion/Juggernaut.safetensors";
-#wget "https://civitai.com/api/download/models/128078?type=Model&format=SafeTensor&size=full&fp=fp32" -O "Stable-diffusion/Vanilla.safetensors";
+wget "https://civitai.com/api/download/models/164378?type=Model&format=SafeTensor&size=pruned&fp=fp16" -O "Stable-diffusion/TimeLessXL.safetensors";
 wget "https://civitai.com/api/download/models/134461?type=Model&format=SafeTensor&size=full&fp=fp16" -O "Stable-diffusion/SDVN6-RealXL.safetensors";
 wget "https://civitai.com/api/download/models/131960?type=VAE&format=SafeTensor" -O "VAE/TalmendoXL.safetensors";
 wget "https://civitai.com/api/download/models/135867?type=Model&format=SafeTensor" -O "Lora/Detail_Tweaker_XL.safetensors" ;
@@ -73,6 +74,7 @@ cd /workspace/download
 cat <<EOT > copy_downloaded_models.sh
 #!/bin/bash
 cd /workspace
+mkdir stable-diffusion-webui/models/Stable-diffusion/
 mkdir stable-diffusion-webui/models/embeddings/
 mkdir stable-diffusion-webui/models/VAE/
 mkdir stable-diffusion-webui/models/Lora/
@@ -80,11 +82,18 @@ mv download/Stable-diffusion/* stable-diffusion-webui/models/Stable-diffusion/
 mv download/embeddings/* stable-diffusion-webui/models/embeddings/
 mv download/Lora/* stable-diffusion-webui/models/Lora/
 mv download/VAE/* stable-diffusion-webui/models/VAE/
+
 if [ -z "$A1111" ]; then
-	mv download/controlnet_models/* stable-diffusion-webui/extensions-builtin/sd-webui-controlnet/models/
+	controlnet_path='stable-diffusion-webui/extensions-builtin/sd-webui-controlnet/models/'
 else
-	mv download/controlnet_models/* stable-diffusion-webui/extensions/sd-webui-controlnet/models/
+	controlnet_path='stable-diffusion-webui/extensions/sd-webui-controlnet/models/'
 fi
+
+while [ ! -d $controlnet_path ]; do
+	sleep 1
+done
+
+mv download/controlnet_models/* $controlnet_path
 EOT
 chmod +x copy_downloaded_models.sh
 
@@ -109,21 +118,25 @@ EOT
 chmod +x relauncher.py
 
 #source /workspace/venv/bin/activate
-python3 -u /workspace/stable-diffusion-webui/relauncher.py | while IFS= read -r line
-do
-	echo "--$line"
-	if [[ "$line" == *"Available VAEs"* ]]; then
-		pkill relauncher.py
-		echo "Killed Relauncher as it was stuck at no models"
-		
-		while [[ ! -e /workspace/download/download_finished ]];do
-			sleep 1
-		done
-		
-		/workspace/copy_downloaded_models.sh
-		echo "Copied Models"
-  
-		echo "Setup finished, launching SD :)"  
-		python3 /workspace/stable-diffusion-webui/relauncher.py
-	fi
-done
+if [ -z "$A1111" ]; then
+	python3 -u /workspace/stable-diffusion-webui/relauncher.py | while IFS= read -r line
+	do
+		echo "--$line"
+		if [[ "$line" == *"Available VAEs"* ]]; then
+			pkill relauncher.py
+			echo "Killed Relauncher as it was stuck at no models"
+			
+			while [[ ! -e /workspace/download/download_finished ]];do
+				sleep 1
+			done
+			
+			/workspace/copy_downloaded_models.sh
+			echo "Copied Models"
+	
+			echo "Setup finished, launching SD :)"  
+			python3 /workspace/stable-diffusion-webui/relauncher.py
+		fi
+	done
+else
+	python3 -u /workspace/stable-diffusion-webui/relauncher.py
+fi
