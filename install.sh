@@ -71,7 +71,7 @@ wget "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/sai_x
 wget "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/sai_xl_depth_256lora.safetensors" ;
 wget "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/sai_xl_canny_256lora.safetensors" ;
 
-sleep 1
+sleep 10
 touch /workspace/download/finish) &> download.log &
 
 #Define Copy Job
@@ -96,6 +96,8 @@ while [ ! -f /workspace/download/finish ]; do
 	if [ -d $controlnet_path ]; then
 		mv download/controlnet_models/* $controlnet_path &
 	fi
+
+	sleep 4
 done
 ) &> copy.log &
 
