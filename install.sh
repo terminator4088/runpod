@@ -140,5 +140,5 @@ if [ -z "$A1111" ]; then
 		fi
 	done
 else
-	python3 -u /workspace/stable-diffusion-webui/relauncher.py
+	python3 -u /workspace/stable-diffusion-webui/relauncher.py &
 fi
