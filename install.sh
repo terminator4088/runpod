@@ -93,7 +93,7 @@ while [ ! -f /workspace/download/finish ]; do
 	mv download/Lora/* stable-diffusion-webui/models/Lora/ &
 	mv download/VAE/* stable-diffusion-webui/models/VAE/ &
 
-	if [ -d $controlnet_path ]; do
+	if [ -d $controlnet_path ]; then
 		mv download/controlnet_models/* $controlnet_path &
 	fi
 done
