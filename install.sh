@@ -3,7 +3,7 @@
 #####	Start Docker Cmd: /bin/bash -c 'if [ ! -f /setup.sh ]; then wget "https://raw.githubusercontent.com/terminator4088/runpod/main/install.sh" -O /setup.sh && chmod +x /setup.sh && /setup.sh; fi'
 
 #
-A1111 = 1
+export A1111 = 1
 #
 
 apt update
