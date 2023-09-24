@@ -66,22 +66,20 @@ wget "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/ip-ad
 wget "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/kohya_controllllite_xl_blur.safetensors" ;
 wget "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/t2i-adapter_xl_openpose.safetensors" ;
 wget "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/thibaud_xl_openpose_256lora.safetensors" ;
+wget "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/sai_xl_sketch_256lora.safetensors" ;
+wget "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/sai_xl_recolor_256lora.safetensors" ;
+wget "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/sai_xl_depth_256lora.safetensors" ;
+wget "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/sai_xl_canny_256lora.safetensors" ;
 
-./workspace/copy_downloaded_models.sh) &> download.log &
+sleep 1
+touch /workspace/download/finish) &> download.log &
 
-#Define Copy Script
-cd /workspace
-cat <<EOT > copy_downloaded_models.sh
-#!/bin/bash
-cd /workspace
+#Define Copy Job
+(cd /workspace
 mkdir stable-diffusion-webui/models/Stable-diffusion/
 mkdir stable-diffusion-webui/models/embeddings/
 mkdir stable-diffusion-webui/models/VAE/
 mkdir stable-diffusion-webui/models/Lora/
-mv download/Stable-diffusion/* stable-diffusion-webui/models/Stable-diffusion/
-mv download/embeddings/* stable-diffusion-webui/models/embeddings/
-mv download/Lora/* stable-diffusion-webui/models/Lora/
-mv download/VAE/* stable-diffusion-webui/models/VAE/
 
 if [ -z "$A1111" ]; then
 	controlnet_path='stable-diffusion-webui/extensions-builtin/sd-webui-controlnet/models/'
@@ -89,13 +87,17 @@ else
 	controlnet_path='stable-diffusion-webui/extensions/sd-webui-controlnet/models/'
 fi
 
-while [ ! -d $controlnet_path ]; do
-	sleep 1
-done
+while [ ! -f /workspace/download/finish ]; do
+	mv download/Stable-diffusion/* stable-diffusion-webui/models/Stable-diffusion/ &
+	mv download/embeddings/* stable-diffusion-webui/models/embeddings/ &
+	mv download/Lora/* stable-diffusion-webui/models/Lora/ &
+	mv download/VAE/* stable-diffusion-webui/models/VAE/ &
 
-mv download/controlnet_models/* $controlnet_path
-EOT
-chmod +x copy_downloaded_models.sh
+	if [ -d $controlnet_path ]; do
+		mv download/controlnet_models/* $controlnet_path &
+	fi
+done
+) &> copy.log &
 
 
 #Write necessary files
