@@ -29,7 +29,7 @@ if [ -z "$A1111" ]; then
 else
 	echo "Installing A1111"
 	git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git ./
- 	git checkout tags/v1.6.0
+ 	#git checkout tags/v1.6.0
 
   	cd extensions
 	#git clone https://github.com/Mikubill/sd-webui-controlnet.git
