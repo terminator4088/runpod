@@ -32,12 +32,11 @@ else
  	git checkout tags/v1.6.0
 
   	cd extensions
-	git clone https://github.com/Mikubill/sd-webui-controlnet.git
+	#git clone https://github.com/Mikubill/sd-webui-controlnet.git
 	git clone https://github.com/ahgsql/StyleSelectorXL
- 	git clone https://github.com/continue-revolution/sd-webui-animatediff
 	git clone https://github.com/imrayya/stable-diffusion-webui-Prompt_Generator.git
-	git clone https://github.com/IDEA-Research/DWPose
-	git clone https://github.com/Uminosachi/sd-webui-inpaint-anything.git
+	#git clone https://github.com/IDEA-Research/DWPose
+	#git clone https://github.com/Uminosachi/sd-webui-inpaint-anything.git
 	#git clone https://github.com/d8ahazard/sd_dreambooth_extension.git ./extensions/sd_dreambooth_extension
 fi
 
