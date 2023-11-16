@@ -47,32 +47,38 @@ else
 	controlnet_path='/workspace/stable-diffusion-webui/extensions/sd-webui-controlnet/models/'
 fi
 
-(
 
+#wget "https://civitai.com/api/download/models/174609?type=Model&format=SafeTensor&size=full&fp=fp16" -O "Stable-diffusion/UnstableDiffusion.safetensors";
+# wget "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/diffusers_xl_depth_mid.safetensors" -P $controlnet_path ;
+# wget "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/diffusers_xl_canny_mid.safetensors" -P $controlnet_path ;
+# wget "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/ip-adapter_xl.pth" -P $controlnet_path ;
+# wget "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/kohya_controllllite_xl_blur.safetensors" -P $controlnet_path ;
+# wget "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/t2i-adapter_xl_openpose.safetensors" -P $controlnet_path ;
+# wget "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/thibaud_xl_openpose_256lora.safetensors" -P $controlnet_path ;
+# wget "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/sai_xl_sketch_256lora.safetensors" -P $controlnet_path ;
+# wget "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/sai_xl_recolor_256lora.safetensors" -P $controlnet_path ;
+# wget "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/sai_xl_depth_256lora.safetensors" -P $controlnet_path ;
+# wget "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/sai_xl_canny_256lora.safetensors" -P $controlnet_path ;
+(
 cd /workspace/stable-diffusion-webui/models;
 mkdir Stable-diffusion;
 mkdir Lora;
 mkdir embeddings;
 mkdir VAE;
-wget "https://civitai.com/api/download/models/174609?type=Model&format=SafeTensor&size=full&fp=fp16" -O "Stable-diffusion/UnstableDiffusion.safetensors";
-wget "https://civitai.com/api/download/models/169921?type=Model&format=SafeTensor&size=pruned&fp=fp16" -O "Stable-diffusion/RealVisXL.safetensors";
-wget "https://civitai.com/api/download/models/182077?type=Model&format=SafeTensor&size=full&fp=fp16" -O "Stable-diffusion/Starlight XL.safetensors";
+wget "https://civitai.com/api/download/models/198246?type=Model&format=SafeTensor&size=pruned&fp=fp16" -O "Stable-diffusion/TimeLessXL.safetensors";
+wget "https://civitai.com/api/download/models/169740?type=Model&format=SafeTensor&size=full&fp=fp16" -O "Stable-diffusion/ZavyXL.safetensors";
+wget "https://huggingface.co/segmind/SSD-1B/resolve/main/SSD-1B-A1111.safetensors?download=true -O "Stable-diffusion/SSD-1B.safetensors";
+
 wget "https://civitai.com/api/download/models/131960?type=VAE&format=SafeTensor" -O "VAE/TalmendoXL.safetensors";
+
+wget "https://huggingface.co/latent-consistency/lcm-lora-sdxl/resolve/main/pytorch_lora_weights.safetensors?download=true" -O "Lora/LCM-SDXL.safetensors";
+wget "https://huggingface.co/latent-consistency/lcm-lora-ssd-1b/resolve/main/pytorch_lora_weights.safetensors?download=true" -O "Lora/LCM-SSD-1B.safetensors";
+
 wget "https://civitai.com/api/download/models/135867?type=Model&format=SafeTensor" -O "Lora/Detail_Tweaker_XL.safetensors" ;
 wget "https://civitai.com/api/download/models/169002?type=Model&format=SafeTensor" -O "Lora/Artfull_Fractal.safetensors" ;
 wget "https://civitai.com/api/download/models/152309?type=Model&format=SafeTensor" -O "Lora/Artfull_Base.safetensors" ;
 wget "https://civitai.com/api/download/models/169041?type=Model&format=SafeTensor" -O "Lora/Schematics.safetensors" ;
 
-wget "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/diffusers_xl_depth_mid.safetensors" -P $controlnet_path ;
-wget "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/diffusers_xl_canny_mid.safetensors" -P $controlnet_path ;
-wget "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/ip-adapter_xl.pth" -P $controlnet_path ;
-wget "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/kohya_controllllite_xl_blur.safetensors" -P $controlnet_path ;
-wget "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/t2i-adapter_xl_openpose.safetensors" -P $controlnet_path ;
-wget "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/thibaud_xl_openpose_256lora.safetensors" -P $controlnet_path ;
-wget "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/sai_xl_sketch_256lora.safetensors" -P $controlnet_path ;
-wget "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/sai_xl_recolor_256lora.safetensors" -P $controlnet_path ;
-wget "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/sai_xl_depth_256lora.safetensors" -P $controlnet_path ;
-wget "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/sai_xl_canny_256lora.safetensors" -P $controlnet_path ;
 
 sleep 10
 touch /workspace/download/finish) &> download.log &
