@@ -66,7 +66,7 @@ mkdir embeddings;
 mkdir VAE;
 wget "https://civitai.com/api/download/models/198246?type=Model&format=SafeTensor&size=pruned&fp=fp16" -O "Stable-diffusion/TimeLessXL.safetensors";
 wget "https://civitai.com/api/download/models/169740?type=Model&format=SafeTensor&size=full&fp=fp16" -O "Stable-diffusion/ZavyXL.safetensors";
-wget "https://huggingface.co/segmind/SSD-1B/resolve/main/SSD-1B-A1111.safetensors?download=true -O "Stable-diffusion/SSD-1B.safetensors";
+wget "https://huggingface.co/segmind/SSD-1B/resolve/main/SSD-1B-A1111.safetensors?download=true" -O "Stable-diffusion/SSD-1B.safetensors";
 
 wget "https://civitai.com/api/download/models/131960?type=VAE&format=SafeTensor" -O "VAE/TalmendoXL.safetensors";
 
