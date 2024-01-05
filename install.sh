@@ -32,11 +32,11 @@ else
  	#git checkout tags/v1.6.0
 
   	cd extensions
-	#git clone https://github.com/Mikubill/sd-webui-controlnet.git
-	git clone https://github.com/ahgsql/StyleSelectorXL
-	git clone https://github.com/imrayya/stable-diffusion-webui-Prompt_Generator.git
+	git clone https://github.com/Mikubill/sd-webui-controlnet.git
+	#git clone https://github.com/ahgsql/StyleSelectorXL
+	#git clone https://github.com/imrayya/stable-diffusion-webui-Prompt_Generator.git
 	#git clone https://github.com/IDEA-Research/DWPose
-	#git clone https://github.com/Uminosachi/sd-webui-inpaint-anything.git
+	git clone https://github.com/Uminosachi/sd-webui-inpaint-anything.git
 	#git clone https://github.com/d8ahazard/sd_dreambooth_extension.git ./extensions/sd_dreambooth_extension
 fi
 
@@ -46,18 +46,22 @@ else
 	controlnet_path='/workspace/stable-diffusion-webui/extensions/sd-webui-controlnet/models/'
 fi
 
+(
+wget "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/diffusers_xl_depth_mid.safetensors" -P $controlnet_path ;
+wget "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/diffusers_xl_canny_mid.safetensors" -P $controlnet_path ;
+wget "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/ip-adapter_xl.pth" -P $controlnet_path ;
+wget "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/kohya_controllllite_xl_blur.safetensors" -P $controlnet_path ;
+wget "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/t2i-adapter_xl_openpose.safetensors" -P $controlnet_path ;
+wget "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/thibaud_xl_openpose_256lora.safetensors" -P $controlnet_path ;
+wget "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/sai_xl_sketch_256lora.safetensors" -P $controlnet_path ;
+wget "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/sai_xl_recolor_256lora.safetensors" -P $controlnet_path ;
+wget "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/sai_xl_depth_256lora.safetensors" -P $controlnet_path ;
+wget "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/sai_xl_canny_256lora.safetensors" -P $controlnet_path ;
+wget "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid_sdxl.bin" -P $controlnet_path ;
 
-#wget "https://civitai.com/api/download/models/174609?type=Model&format=SafeTensor&size=full&fp=fp16" -O "Stable-diffusion/UnstableDiffusion.safetensors";
-# wget "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/diffusers_xl_depth_mid.safetensors" -P $controlnet_path ;
-# wget "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/diffusers_xl_canny_mid.safetensors" -P $controlnet_path ;
-# wget "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/ip-adapter_xl.pth" -P $controlnet_path ;
-# wget "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/kohya_controllllite_xl_blur.safetensors" -P $controlnet_path ;
-# wget "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/t2i-adapter_xl_openpose.safetensors" -P $controlnet_path ;
-# wget "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/thibaud_xl_openpose_256lora.safetensors" -P $controlnet_path ;
-# wget "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/sai_xl_sketch_256lora.safetensors" -P $controlnet_path ;
-# wget "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/sai_xl_recolor_256lora.safetensors" -P $controlnet_path ;
-# wget "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/sai_xl_depth_256lora.safetensors" -P $controlnet_path ;
-# wget "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/sai_xl_canny_256lora.safetensors" -P $controlnet_path ;
+sleep 10
+touch /workspace/download/control_finish) &> control_download.log &
+
 (
 cd /workspace/stable-diffusion-webui/models;
 mkdir Stable-diffusion;
@@ -100,7 +104,9 @@ while [ ! -f /workspace/download/finish ]; do
 	mv download/embeddings/* stable-diffusion-webui/models/embeddings/ &
 	mv download/Lora/* stable-diffusion-webui/models/Lora/ &
 	mv download/VAE/* stable-diffusion-webui/models/VAE/ &
+done
 
+while [ ! -f /workspace/download/control_finish ]; do
 	if [ -d $controlnet_path ]; then
 		mv download/controlnet_models/* $controlnet_path &
 	fi
